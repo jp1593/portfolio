@@ -1,3 +1,4 @@
+import { NavBar } from "./components/layout/Navbar";
 import { About } from "./components/sections/About";
 import { Experience } from "./components/sections/Experience";
 import { Hero } from "./components/sections/Hero";
