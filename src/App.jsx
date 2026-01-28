@@ -8,12 +8,13 @@ function App() {
   return (
     //Height of layout will be the total height of the screen size
     <div className="min-h-screen overflow-x-hidden">
-      <NavBar>
+      <NavBar />
+      <main>
         <Hero />
         <About />
         <Projects />
         <Experience />
-      </NavBar>
+      </main>
     </div>
   )
 }
