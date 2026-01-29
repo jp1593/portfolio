@@ -1,5 +1,5 @@
 // Button Imports
-import { Button } from "../Button"
+import { Button } from "../buttons/Button"
 
 // Navigation Links
 const navLinks = [
