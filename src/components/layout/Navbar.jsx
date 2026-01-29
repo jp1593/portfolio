@@ -1,5 +1,7 @@
 // Button Imports
 import { Button } from "../buttons/Button"
+import jpLogo from "../../assets/jp1593logo.png"
+import { useEffect, useState } from "react"
 
 // Navigation Links
 const navLinks = [
@@ -11,12 +13,29 @@ const navLinks = [
 ]
 
 export const NavBar = () => {
+    const [isScrolled, setIsScrolled] = useState(false)
+
+    useEffect(() => {
+        const handleScroll = () => {
+                setIsScrolled(window.scrollY > 50);
+        }
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [])
+
     return (
-        <header className="fixed top-0 left-0 bg-transparent py-5 right-0 z-50">
-            <nav className="container mx-auto px-6 flex items-center justify-between">
-                <a href="#" className="text-xl font-bold tracking-tight hover:text-primary">
-                    JP<span className="text-primary">.</span>
+        <header className={`fixed top-0 left-0 right-0 ${isScrolled ? "glass-strong py-3" : " bg-transparent py-5"} z-50`}>
+            <nav className="container ml-26 px-6 flex items-center justify-between">
+                <a href="#" className="relative flex items-center h-8 w-30 -px-30">
+                    <img
+                        src={jpLogo}
+                        alt="JP Logo"
+                        className="h-30 w-auto absolute left-20 top-1/2 -translate-y-1/2"
+                    />
                 </a>
+
+
 
                 {/* Desktop Nav */}
                 <div className="flex items-center gap-1">
