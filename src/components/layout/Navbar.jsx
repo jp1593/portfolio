@@ -6,10 +6,8 @@ import { useEffect, useState } from "react"
 // Navigation Links
 const navLinks = [
     { href: "#about", label: "About" },
-    { href: "#experience", label: "Experience" },
-    { href: "#hero", label: "Hero" },
     { href: "#projects", label: "Projects" },
-
+    { href: "#experience", label: "Experience" },
 ]
 
 export const NavBar = () => {
@@ -17,7 +15,7 @@ export const NavBar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-                setIsScrolled(window.scrollY > 50);
+            setIsScrolled(window.scrollY > 50);
         }
         window.addEventListener("scroll", handleScroll);
 
@@ -26,12 +24,12 @@ export const NavBar = () => {
 
     return (
         <header className={`fixed top-0 left-0 right-0 ${isScrolled ? "glass-strong py-3" : " bg-transparent py-5"} z-50`}>
-            <nav className="container ml-26 px-6 flex items-center justify-between">
-                <a href="#" className="relative flex items-center h-8 w-30 -px-30">
+            <nav className="container ml-32 px-6 flex items-center justify-between">
+                <a href="#" className="relative flex items-center h-8 w-30">
                     <img
                         src={jpLogo}
                         alt="JP Logo"
-                        className="h-30 w-auto absolute left-20 top-1/2 -translate-y-1/2"
+                        className="h-30 w-auto absolute left-12 top-1/2 -translate-y-1/2"
                     />
                 </a>
 
