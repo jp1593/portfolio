@@ -36,11 +36,11 @@ export const About = () => {
                         </div>
 
                         <h2 className="text-4xl md:text-5xl font-bold leading-tight animate-fade-in animation-delay-100 text-secondary-foreground">
-                            Seeking the depth
+                            Diving deep
                             <br />
                             <span className="font-sans italic font-normal text-white">
                                 {" "}
-                                on technology
+                                into technology
                             </span>
                         </h2>
                         <div className="space-y-4 text-muted-foreground animate-fade-in animation-delay-200">
