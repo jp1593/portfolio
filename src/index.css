@@ -10,7 +10,7 @@
   --color-primary-foreground: #ffffff;
 
   --color-secondary: #1f2830;
-  --color-secondary-foreground: #20b2a6;
+  --color-secondary-foreground: #ffe082;
 
   --color-muted: #252e37;
   --color-muted-foreground: #7a8491;
@@ -146,7 +146,7 @@
     }
   }
 
-  .animate-marquee { 
+  .animate-marquee {
     animation: marquee 30s linear infinite;
   }
 }
