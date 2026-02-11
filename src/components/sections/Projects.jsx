@@ -15,7 +15,7 @@ const projects = [
         title: "Ubymed Partners — Provider App",
         description:
             "Mobile platform built for healthcare providers (doctors and laboratories) to accept and manage service requests. I led feature development including maps with directions, autocomplete, and place search, optimized provider workflows, and improved system reliability. I also implemented secure token synchronization, maintained backend services with Docker and Nginx, and strengthened collaboration through pull request reviews and a branch management strategy that reduced conflicts and improved delivery speed.",
-        media: {type: "image", src: UbymedPartners},
+        media: { type: "image", src: UbymedPartners },
         tags: ["React Native", "Expo", "Django", "Python", "Docker", "Nginx", "AWS"],
         link: "#",
         github: "#"
@@ -83,13 +83,16 @@ export const Projects = () => {
                                 <p className="text-muted-foreground text-sm">{item.description}</p>
                                 <div className="flex flex-wrap gap-2">
                                     {item.tags.map((tag, index) => (
-                                        <span key={index} className="px-4 py-1.5 rounded-full bg-surface text-xs font-medium border border-boder/50 text-muted-foreground hover:border-primary/50 hover:text-primary transition-all duration-500">{tag}</span>
+                                        <span key={index}
+                                            className="px-4 py-1.5 rounded-full bg-surface text-xs font-medium border border-boder/50 text-muted-foreground hover:border-primary/50 hover:text-primary transition-all duration-500"
+                                        >
+                                            {tag}</span>
                                     ))}</div>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
-        </section>
+        </section >
     )
 }
