@@ -52,7 +52,7 @@ export const Hero = () => {
                             </h1>
                             <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-300">
                                 Welcome to the digital workspace of Juan Pablo Estrada Lucero
-                                - A Software Engineer specializing in full-stack development. With a core proficiency in Python
+                                - A Software Engineer focused on Backend Engineering and Full-Stack Development. With a core proficiency in Python
                                 (Django) and JavaScript (React), I build seamless, high-performance web and mobile applications.
                             </p>
                         </div>
@@ -70,7 +70,7 @@ export const Hero = () => {
                         <div className="flex items-center gap-4 animate-fade-in animation-delay-300">
                             <span> Follow:</span>
                             {[
-                                { icon: Github, href: "https://github.com/jp1593"},
+                                { icon: Github, href: "https://github.com/jp1593" },
                                 { icon: Linkedin, href: "https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/" },
                                 { icon: X, href: "https://x.com/JpEL_" }
 
