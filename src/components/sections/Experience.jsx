@@ -2,7 +2,7 @@ const experiences = [
     {
         period: "Feb 2025 - Present",
         role: "Freelance Full Stack Developer",
-        company: "Ubymed",
+        company: "Ubymed S.A.",
         description: "At Ubymed SA., I worked as a Full Stack Developer. Contributing to the development and maintenance of the mobile application on both Android and iOS platforms. I implemented new features and refactored existing code using React Native and Python/Django, improving app stability and performance. I managed deployment processes through Apple Developer and Google Play Console, maintained backend services with Docker and Nginx, and optimized token management between frontend and backend. Additionally, I developed a maps feature with directions, autocomplete, and place search, and built production and testing versions using Expo EAS. During one month, I reviewed and approved pull requests and proposed a branch management strategy that enhanced team collaboration and reduced merge conflicts.",
         technologies: ["React Native", "Django", "PostgreSQL", "Amazon Web Services (AWS)", "Docker", "Nginx", "Google API", "Python", "Javascript", "Expo"],
         current: true,
@@ -10,7 +10,7 @@ const experiences = [
     {
         period: "Jun 2024 - Jul 2024",
         role: "Full Stack Developer - Internship",
-        company: "Suministros & Alimentos SA.",
+        company: "Suministros & Alimentos S.A.",
         description: "After being on a period of internship on Suministros & Alimentos SA. I proposed a project to develop a web application aimed at ensuring the accuracy and transparency of data registered by supervisors across various factory areas. This agilize the analitics made by the continues improvent area in which I was working on. Key features of the application included secure logins with company email accounts, efficient data management and transformation capabilities, and responsive views for both mobile and laptop devices.",
         technologies: ["React", "Javascript", "Django", "Python", "Google API", "SQL"],
         current: false,
