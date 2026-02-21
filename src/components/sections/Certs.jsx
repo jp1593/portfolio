@@ -1,9 +1,10 @@
-import { ExternalLink } from "lucide-react";
+import { ArrowDown, ExpandIcon, ExternalLink } from "lucide-react";
 import ghFoundations from "../../assets/certs/ghFoundations.png";
 import ibmDatascience from "../../assets/certs/ibmDatascience.png";
 import ibmPm from "../../assets/certs/ibmPm.png";
 import scrumLab from "../../assets/certs/scrumlab.png";
 import stanfordCodeinplace from "../../assets/certs/stanfordCodeinplace.png";
+import { Button } from "../buttons/Button";
 
 const certs = [
     {
@@ -103,11 +104,33 @@ export const Certs = () => {
                                             </div>
                                         }
                                     </div>
+
                                 </div>
                             </div>
                         ))}
+
                     </div>
 
+                </div>
+
+            </div>
+            <div className="flex flex-col items-center justify-center text-center mt-8">
+                <span className="text-secondary-foreground">
+                    Checkout my other certifications
+                </span>
+                <ArrowDown className="text-secondary-foreground" />
+
+                <div className="flex items-center justify-center gap-2 gap-y-10 mt-2 text-muted-foreground">
+                    <a href="https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/?originalSubdomain=gt">
+                        <Button className="bg-surface hover:text-white">
+                            Linkedin <ExternalLink />
+                        </Button>
+                    </a>
+                    <a href="https://www.credly.com/users/juan-pablo-estrada-lucero"> 
+                        <Button className="bg-surface hover:text-white">
+                            Credly <ExternalLink />
+                        </Button>
+                    </a>
                 </div>
             </div>
         </section>
