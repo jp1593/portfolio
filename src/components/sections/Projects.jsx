@@ -1,5 +1,7 @@
 import Ubymed from "../../assets/projects/Ubymed.mp4"
 import UbymedPartners from "../../assets/projects/UbymedPartners.png"
+import { ArrowDown, ExternalLink, Github } from "lucide-react"
+import { Button } from "../buttons/Button"
 
 const projects = [
     {
@@ -91,6 +93,30 @@ export const Projects = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+            </div>
+            <div className="flex flex-col items-center justify-center text-center mt-6">
+                {/* Enhanced Text: Connecting Certs to Projects */}
+                <h3 className="text-secondary-foreground font-medium mb-2">
+                    From Theory to Practice
+                </h3>
+                <p className="text-muted-foreground max-w-md mb-4 text-sm">
+                    See how I apply these skills to build
+                    real-world solutions and scalable applications.
+                </p>
+
+                {/* The Animated Pointer */}
+                <span className="text-xs uppercase tracking-widest text-primary font-bold mb-2">
+                    Explore My Code
+                </span>
+                <ArrowDown className="text-primary animate-bounce h-5 w-5" />
+
+                <div className="flex items-center justify-center gap-4 mt-1">
+                    <a href="https://github.com/jp1593" target="_blank" rel="noopener noreferrer">
+                        <Button className="bg-surface hover:text-white flex gap-2 items-center">
+                            View GitHub Projects <Github size={18} />
+                        </Button>
+                    </a>
                 </div>
             </div>
         </section >
