@@ -1,7 +1,7 @@
 import { Button } from "../buttons/Button"
 import jpLogo from "../../assets/jp1593logo.png"
 import { useEffect, useState } from "react"
-import { Menu, X } from "lucide-react" 
+import { Menu, X } from "lucide-react"
 
 const navLinks = [
     { href: "#about", label: "About" },
@@ -13,7 +13,10 @@ const navLinks = [
 export const NavBar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-
+    const recipient = 'juanpablo08082002@hotmail.com'
+    const subject = 'Inquiry from Website';
+    const body = 'Hello, I would like to get in touch with you.';
+    const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50)
@@ -55,10 +58,13 @@ export const NavBar = () => {
                 </div>
 
                 {/* Desktop Button */}
+
                 <div className="hidden md:flex justify-end">
-                    <Button size="sm">
-                        Contact Me
-                    </Button>
+                    <a href={mailtoUrl}>
+                        <Button size="sm">
+                            Contact Me
+                        </Button>
+                    </a>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -84,10 +90,11 @@ export const NavBar = () => {
                                 {link.label}
                             </a>
                         ))}
-
-                        <Button size="sm" className="mt-2">
-                            Contact Me
-                        </Button>
+                        <a href={mailtoUrl}>
+                            <Button size="sm" className="mt-2">
+                                Contact Me
+                            </Button>
+                        </a>
                     </div>
                 </div>
             )}
