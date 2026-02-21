@@ -118,15 +118,15 @@ export const Certs = () => {
                 <span className="text-secondary-foreground">
                     Checkout my other certifications
                 </span>
-                <ArrowDown className="text-secondary-foreground" />
+                <ArrowDown className="text-secondary-foreground animate-bounce mt-2" />
 
-                <div className="flex items-center justify-center gap-2 gap-y-10 mt-2 text-muted-foreground">
+                <div className="flex items-center justify-center gap-2 text-muted-foreground">
                     <a href="https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/?originalSubdomain=gt">
                         <Button className="bg-surface hover:text-white">
                             Linkedin <ExternalLink />
                         </Button>
                     </a>
-                    <a href="https://www.credly.com/users/juan-pablo-estrada-lucero"> 
+                    <a href="https://www.credly.com/users/juan-pablo-estrada-lucero">
                         <Button className="bg-surface hover:text-white">
                             Credly <ExternalLink />
                         </Button>
