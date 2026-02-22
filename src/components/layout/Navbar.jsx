@@ -14,8 +14,18 @@ export const NavBar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const recipient = 'juanpablo08082002@hotmail.com'
-    const subject = 'Inquiry from Website';
-    const body = 'Hello, I would like to get in touch with you.';
+    const subject = '[Project/Role Inquiry] - Juan Pablo | [Your Company Name]';
+    const body = `Hello Juan Pablo,
+
+I am reaching out regarding: [Project Name / Job Title]
+
+Company/Organization: [Enter Name]
+Message: [Briefly describe why you are reaching out]
+
+You can best reach me at: [Phone/Email]
+
+Best regards,
+[Your Name]`;
     const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     useEffect(() => {
         const handleScroll = () => {
