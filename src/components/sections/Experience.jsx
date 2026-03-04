@@ -1,3 +1,5 @@
+import { useInView } from "../../hooks/useInView";
+
 const experiences = [
     {
         period: "Feb 2025 - Present",
@@ -34,14 +36,28 @@ const experiences = [
 ]
 
 export const Experience = () => {
+
+    const [sectionRef, isVisible] = useInView({
+        threshold: 0.15,
+    });
+
     return (
         <section id="experience"
-            className="py-32 relative overflow-hidden">
+            className="py-32 relative overflow-hidden"
+            ref={sectionRef}>
             <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2" />
 
             <div className="container mx-auto px-6 relative z-10">
                 {/* Section Header */}
-                <div className="max-w-3xl mb-16">
+                <div
+                    className={`
+    max-w-3xl mb-16
+    transform transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+    ${isVisible
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-10"}
+  `}
+                >
                     <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">Engineering Journey</span>
                     <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
                         My professional roadmap: <span className="font-sans italic font-normal text-white"> solving problems and shipping code.</span>
@@ -56,7 +72,20 @@ export const Experience = () => {
                     {/* Experiences */}
                     <div className="space-y-12">
                         {experiences.map((exp, id) => (
-                            <div key={id} className="relative grid md:grid-cols-2 gap-8 animate-fade-in" style={{ animationDelay: `${(id + 1) * 150}ms` }}>
+                            <div
+                                key={id}
+                                className={`
+    relative grid md:grid-cols-2 gap-8
+    transform transition-all duration-800 ease-[cubic-bezier(0.22,1,0.36,1)]
+    ${isVisible
+                                        ? "opacity-100 translate-x-0"
+                                        : id % 2 === 0
+                                            ? "opacity-0 -translate-x-16"
+                                            : "opacity-0 translate-x-16"
+                                    }
+  `}
+                                style={{ transitionDelay: `${id * 200}ms` }}
+                            >
 
                                 {/* Timeline Dot */}
                                 <div className="absolute left-0 md:left-1/2 top-0 w-4 h-4 bg-primary rounded-full -translate-x-1/2 ring-4 ring-background z-10">

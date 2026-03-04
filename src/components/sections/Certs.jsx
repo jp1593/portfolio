@@ -5,6 +5,7 @@ import ibmPm from "../../assets/certs/ibmPm.png";
 import scrumLab from "../../assets/certs/scrumlab.png";
 import stanfordCodeinplace from "../../assets/certs/stanfordCodeinplace.png";
 import { Button } from "../buttons/Button";
+import { useInView } from "../../hooks/useInView";
 
 const certs = [
     {
@@ -57,15 +58,27 @@ const certs = [
 
 
 export const Certs = () => {
+    const [sectionRef, isVisible] = useInView({
+        threshold: 0.3,
+    });
+
+
     return (
 
         <section id="certifications"
-            className="py-31 relative overflow-hidden">
+            className="py-31 relative overflow-hidden" ref={sectionRef}>
 
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/70 rounded-full blur-3xl" />
             <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/85 rounded-full blur-3xl" />
             <div className="container mx-auto px-6 reltive z-10">
-                <div className="text-center mx-auto max-w-3xl mb-16">
+                <div
+                    className={`
+    text-center mx-auto max-w-3xl mb-16
+    transform transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+    ${isVisible
+                            ? "animate-fade-in animation-delay-100" : "opacity-0"}
+  `}
+                >
                     <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">
                         Certifications
                     </span>
@@ -83,7 +96,10 @@ export const Certs = () => {
                 <div className="">
                     <div className="flex flex-wrap gap-20 gap-y-20 justify-center">
                         {certs.map((cert, id) => (
-                            <div className="max-w-82 w-full rounded-3xl border border-primary glass glow-border animate-fade-in flex flex-col transition-transform duration-300 ease-out hover:scale-105" style={{ animationDelay: `${(id + 1) * 200}ms` }}>
+                            <div className={`max-w-82 w-full rounded-3xl border border-primary glass glow-border 
+flex flex-col transition-transform duration-300 ease-out hover:scale-105
+${isVisible ? "animate-fade-in" : "opacity-0"}
+`} style={{ animationDelay: `${(id + 1) * 200}ms` }}>
                                 <div className="flex w-full justify-center mt-4 mb-4" >
                                     <img className="max-w-48" src={cert.img} />
                                 </div>

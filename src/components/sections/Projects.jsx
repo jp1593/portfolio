@@ -2,6 +2,7 @@ import Ubymed from "../../assets/projects/Ubymed.mp4"
 import UbymedPartners from "../../assets/projects/UbymedPartners.png"
 import { ArrowDown, ExternalLink, Github } from "lucide-react"
 import { Button } from "../buttons/Button"
+import { useInView } from "../../hooks/useInView";
 
 const projects = [
     {
@@ -26,32 +27,46 @@ const projects = [
 
 
 export const Projects = () => {
+    const [sectionRef, isVisible] = useInView({
+        threshold: 0.2,
+    });
+
     return (
-        <section id="projects" className="py-24 relative overflow-hidden">
+        <section id="projects" className="py-24 relative overflow-hidden" ref={sectionRef}>
             {/* Background */}
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/70 rounded-full blur-3xl" />
             <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/85 rounded-full blur-3xl" />
             <div className="container mx-auto px-6 reltive z-10">
                 {/* Section Header */}
                 <div className="text-center mx-auto max-w-3xl mb-16">
-                    <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">
+                    <span className={`text-secondary-foreground text-sm font-medium tracking-wider uppercase
+    ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
                         My Work
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animation-fade-in animation-delay-100 text-secondary-foreground">
+                    <h2 className={`text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground
+    ${isVisible ? "animate-fade-in animation-delay-100" : "opacity-0"}`}>
                         Real-World
                         <span className="font-sans italic font-normal text-white">
                             {" "}
                             Projects.
                         </span>
                     </h2>
-                    <p className="text-muted-foreground animate-fade-in animation-delay-200">
+                    <p className={`text-muted-foreground
+    ${isVisible ? "animate-fade-in animation-delay-200" : "opacity-0"}`}>
                         This is where you’ll find some of the projects I’ve built,
                         from full-stack apps to backend systems. Each one reflects what I enjoy most: solving problems, learning new things, and turning ideas into working software.
                     </p>
                 </div>
                 <div className="grid md:grid-cols-2 gap-8">
                     {projects.map((item, id) => (
-                        <div key={id} className="group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1" style={{ animationDelay: `${(id + 1) * 100}ms` }}>
+                        <div
+                            key={id}
+                            className={`group glass rounded-2xl overflow-hidden md:row-span-1
+    transition-all duration-700 ease-out
+    ${isVisible ? "animate-fade-in" : "opacity-0 translate-y-10"}
+    `}
+                            style={{ animationDelay: `${(id + 1) * 150}ms` }}
+                        >
                             <div className="relative overflow-hidden aspect-video">
                                 {/* <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" /> */}
                                 {item.media.type === "video" ? (
