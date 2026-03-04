@@ -3,6 +3,7 @@ import hawk from "../../assets/hawk.jpeg"
 import { Button } from "../buttons/Button"
 import { AnimatedBorderButton } from "../buttons/AnimatedBorderButton"
 import { ChevronDown, Download, Github, Linkedin, X } from "lucide-react"
+import { useEffect } from "react"
 
 const skills = [
     "JavaScript",
@@ -11,6 +12,29 @@ const skills = [
 ];
 
 export const Hero = () => {
+    const recipient = 'juanpablo08082002@hotmail.com'
+    const subject = '[Project/Role Inquiry] - Juan Pablo | [Your Company Name]';
+    const body = `Hello Juan Pablo,
+
+I am reaching out regarding: [Project Name / Job Title]
+
+Company/Organization: [Enter Name]
+Message: [Briefly describe why you are reaching out]
+
+You can best reach me at: [Phone/Email]
+
+Best regards,
+[Your Name]`;
+    const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50)
+        }
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
+
+
     const handleDownload = () => {
         const link = document.createElement('a');
         link.href = '/my-cv.pdf';
@@ -66,9 +90,11 @@ export const Hero = () => {
                         </div>
                         {/* Call to action - Buttons */}
                         <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-                            <Button size="lg">
-                                Contact Me
-                            </Button>
+                            <a href={mailtoUrl}>
+                                <Button size="lg">
+                                    Contact Me
+                                </Button>
+                            </a>
                             <AnimatedBorderButton onClick={handleDownload}>
                                 <Download className="w-5 h-5" />
                                 Download CV
