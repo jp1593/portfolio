@@ -114,7 +114,9 @@ Best regards,
                                     <a
                                         key={id}
                                         href={social.href}
-                                        className="p-2  rounded-full glass hover:bg-primary/10 hover:text-primary transition-colors duration-300"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-colors duration-300"
                                     >
                                         <Icon className="w-5 h-5" />
                                     </a>

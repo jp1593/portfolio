@@ -114,7 +114,12 @@ ${isVisible ? "animate-fade-in" : "opacity-0"}
                                     <div className="mt-auto flex justify-end mb-4">
                                         {cert.link != "" &&
                                             <div className="-mr-5 flex w-10 h-10 rounded-xl bg-primary/10  items-center justify-center  hover:bg-primary/20">
-                                                <a href={cert.link} abel="Certification Link">
+                                                <a
+                                                    href={cert.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    aria-label="Certification Link"
+                                                >
                                                     <ExternalLink className="text-primary mb-1"></ExternalLink>
                                                 </a>
                                             </div>
@@ -137,12 +142,20 @@ ${isVisible ? "animate-fade-in" : "opacity-0"}
                 <ArrowDown className="text-secondary-foreground animate-bounce mt-2" />
 
                 <div className="flex items-center justify-center gap-2 text-muted-foreground">
-                    <a href="https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/?originalSubdomain=gt">
+                    <a
+                        href="https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/?originalSubdomain=gt"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         <Button className="bg-surface hover:text-white">
                             Linkedin <ExternalLink />
                         </Button>
                     </a>
-                    <a href="https://www.credly.com/users/juan-pablo-estrada-lucero">
+                    <a
+                        href="https://www.credly.com/users/juan-pablo-estrada-lucero"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         <Button className="bg-surface hover:text-white">
                             Credly <ExternalLink />
                         </Button>
