@@ -106,7 +106,7 @@ Best regards,
                             {[
                                 { icon: Github, href: "https://github.com/jp1593" },
                                 { icon: Linkedin, href: "https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/" },
-                                { icon: X, href: "https://x.com/JpEL_" }
+                                { icon: X, href: "https://x.com/SirAnonymusGt" }
 
                             ].map((social, id) => {
                                 const Icon = social.icon;
