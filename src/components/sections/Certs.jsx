@@ -7,6 +7,8 @@ import stanfordCodeinplace from "../../assets/certs/stanfordCodeinplace.png";
 import { Button } from "../buttons/Button";
 import { useInView } from "../../hooks/useInView";
 
+
+
 const certs = [
     {
         title: "GitHub Foundations",
@@ -58,8 +60,10 @@ const certs = [
 
 
 export const Certs = () => {
+    const isMobile = window.innerWidth < 768;
+
     const [sectionRef, isVisible] = useInView({
-        threshold: 0.3,
+        threshold: isMobile ? 0.05 : 0.3,
     });
 
 
@@ -75,9 +79,10 @@ export const Certs = () => {
                     className={`
     text-center mx-auto max-w-3xl mb-16
     transform transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
-    ${isVisible
-                            ? "animate-fade-in animation-delay-100" : "opacity-0"}
+        ${isVisible ? "animate-fade-in opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+
   `}
+
                 >
                     <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">
                         Certifications
@@ -98,7 +103,7 @@ export const Certs = () => {
                         {certs.map((cert, id) => (
                             <div className={`max-w-82 w-full rounded-3xl border border-primary glass glow-border 
 flex flex-col transition-transform duration-300 ease-out hover:scale-105
-${isVisible ? "animate-fade-in" : "opacity-0"}
+    ${isVisible ? "animate-fade-in opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
 `} style={{ animationDelay: `${(id + 1) * 200}ms` }}>
                                 <div className="flex w-full justify-center mt-4 mb-4" >
                                     <img className="max-w-48" src={cert.img} />
