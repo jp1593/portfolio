@@ -1,9 +1,9 @@
-import backGroundImage from "../../assets/liquid-purple.jpg"
-import hawk from "../../assets/hawk.jpeg"
 import { Button } from "../buttons/Button"
 import { AnimatedBorderButton } from "../buttons/AnimatedBorderButton"
 import { ChevronDown, Download, Github, Linkedin, X } from "lucide-react"
 import { useEffect } from "react"
+import { useInView } from "../../hooks/useInView";
+
 
 const skills = [
     "JavaScript",
@@ -12,6 +12,9 @@ const skills = [
 ];
 
 export const Hero = () => {
+    const [sectionRef, isVisible] = useInView({
+        threshold: 0.2,
+    });
     const recipient = 'juanpablo08082002@hotmail.com'
     const subject = '[Project/Role Inquiry] - Juan Pablo | [Your Company Name]';
     const body = `Hello Juan Pablo,
@@ -44,10 +47,16 @@ Best regards,
         document.body.removeChild(link);
     };
     return (
-        <section className="relative min-h-screen flex items-center overflow-hidden">
+        <section className="relative min-h-screen flex items-center overflow-hidden"
+            ref={sectionRef}>
             {/* BG */}
             <div className="absolute inset-0">
-                <img src={backGroundImage} alt="Background Image" className="w-full h-full object-cover opacity-40" />
+                <img src="/assets/liquid-purple.webp" alt="Background Image"
+                    className="w-full h-full object-cover opacity-40"
+                    loading="eager"
+                    fetchpriority="low"
+                    decoding="async"
+                />
                 <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" />
             </div>
             {/* Floating Dots */}
@@ -125,12 +134,22 @@ Best regards,
                         </div>
                     </div>
                     {/* Right Column - Image */}
-                    <div className="relative animate-fade-in animation-delay-300">
+                    <div
+                        className={`
+    relative transform transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+    ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+  `}
+                    >
                         {/* Avatar */}
-                        <div className="rlative max-w-md mx-auto">
+                        <div className="relative max-w-md mx-auto">
                             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/30 via-transparent to-primary/10 blur-2xl animate-pulse-glow" />
-                            <div className="relative glass rounded-3xl p-2 glow-border">
-                                <img src={hawk} alt="Hawk Avatar" className="w-full aspect-4/5 object-cover rounded-2xl" />
+                            <div className="relative glass rounded-3xl p-2 glow-border will-change-transform">
+                                <img src="/assets/hawk.webp" alt="Hawk Avatar"
+                                    className="w-full aspect-4/5 object-cover rounded-2xl"
+                                    onLoad={(e) => e.currentTarget.classList.remove("opacity-0")}
+                                    loading="eager"
+                                    fetchpriority="high"
+                                    decoding="sync" />
                             </div>
                         </div>
                     </div>
