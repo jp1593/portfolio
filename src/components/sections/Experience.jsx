@@ -1,41 +1,31 @@
 import { useInView } from "../../hooks/useInView";
+import { useLanguage } from "../../i18n/useLanguage";
 
 const experiences = [
     {
-        period: "Feb 2025 - Present",
-        role: "Freelance Full Stack Developer",
         company: "Ubymed S.A.",
-        description: "At Ubymed S.A., I worked as a Full Stack Developer. Contributing to the development and maintenance of the mobile application on both Android and iOS platforms. I implemented new features and refactored existing code using React Native and Python/Django, improving app stability and performance. I managed deployment processes through Apple Developer and Google Play Console, maintained backend services with Docker and Nginx, and optimized token management between frontend and backend. Additionally, I developed a maps feature with directions, autocomplete, and place search, and built production and testing versions using Expo EAS. During one month, I reviewed and approved pull requests and proposed a branch management strategy that enhanced team collaboration and reduced merge conflicts.",
         technologies: ["React Native", "Django", "PostgreSQL", "Amazon Web Services (AWS)", "Docker", "Nginx", "Google API", "Python", "Javascript", "Expo"],
         current: true,
     },
     {
-        period: "Jun 2024 - Jul 2024",
-        role: "Full Stack Developer - Internship",
         company: "Suministros & Alimentos S.A.",
-        description: "After being on a period of internship on Suministros & Alimentos S.A. I proposed a project to develop a web application aimed at ensuring the accuracy and transparency of data registered by supervisors across various factory areas. This agilize the analitics made by the continues improvent area in which I was working on. Key features of the application included secure logins with company email accounts, efficient data management and transformation capabilities, and responsive views for both mobile and laptop devices.",
         technologies: ["React", "Javascript", "Django", "Python", "Google API", "SQL"],
         current: false,
     },
     {
-        period: "May 2023 - Jul 2023",
-        role: "IT Analyst - Internship",
-        company: "Tribal Worldwide Guatemala - Internship",
-        description: "During my internship at Tribal Worldwide, I gained experience in various areas. I primarily focused on administrative tasks, such as improving the work distribution process, participating on infrastructure projects and identifying suitable suppliers for internal projects. Additionally, I worked as an IT analyst, providing necessary services and support to users. In the DevOps area, I assisted with website renewals and the migration of development environment",
+        company: "Tribal Worldwide Guatemala",
         technologies: ["AWS"],
         current: false,
     },
     {
-        period: "Jun 2022 - Jul 2022",
-        role: "Full Stack Developer - Internship",
         company: "WAU",
-        description: "I settled during an internship at WAU company, with the task of contributing to the initial development of a CRM system that would contribute to the objectives and needs of the company regarding customer contact. I contibute to the system development using Node.Js, JavaScript, MySql, Boostrap and Jquery. In addition to the development, I made the documentation and mockups previously, going through the evaluation process of both of them. Then I was followed up in the assigned activities through daily meetings using the SCRUM methodology.",
         technologies: ["Node.js", "React.js", "MySQL"],
         current: false,
     }
 ]
 
 export const Experience = () => {
+    const { t } = useLanguage();
 
     const [sectionRef, isVisible] = useInView({
         threshold: 0.15,
@@ -58,12 +48,12 @@ export const Experience = () => {
                             : "opacity-0 translate-y-10"}
   `}
                 >
-                    <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">Engineering Journey</span>
+                    <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">{t.experience.eyebrow}</span>
                     <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
-                        My professional roadmap: <span className="font-sans italic font-normal text-white"> solving problems and shipping code.</span>
+                        {t.experience.headingStart} <span className="font-sans italic font-normal text-white"> {t.experience.headingEnd}</span>
                     </h2>
                     <p className="text-muted-foreground animate-fade-in animation-delay-200">
-                        From internships to professional roles.
+                        {t.experience.intro}
                     </p>
                 </div>
                 {/* Timeline */}
@@ -95,10 +85,10 @@ export const Experience = () => {
                                 {/* Content */}
                                 <div className={`pl-8 md:pl-0 ${id % 2 === 0 ? "md:pr-16 md:text-right" : "md:col-start-2 md:pl-16"}`}>
                                     <div className={`glass p-6 rounded-2xl border border-primary/30 hover:border-primary/50 transition-all duration-500`}>
-                                        <span className="text-sm text-primary font-medium">{exp.period}</span>
-                                        <h3 className="text-xl font-semibold mt-2">{exp.role}</h3>
-                                        <p className="text-muted-foreground">{exp.company}</p>
-                                        <p className="text-sm text-muted-foreground mt-4">{exp.description}</p>
+                                        <span className="text-sm text-primary font-medium">{t.experience.periods[id]}</span>
+                                        <h3 className="text-xl font-semibold mt-2">{t.experience.roles[id]}</h3>
+                                        <p className="text-muted-foreground">{exp.company}{t.experience.companySuffixes[id]}</p>
+                                        <p className="text-sm text-muted-foreground mt-4">{t.experience.descriptions[id]}</p>
                                         <div className={`flex flex-wrap gap-2 mt-4 ${id % 2 === 0 ? "md:justify-end" : ""}`}>
                                             {exp.technologies.map((tech, id) => (
                                                 <span key={id} className="px-3 py-1 bg-surface text-xs rounded-full text-muted-foreground">{tech}</span>

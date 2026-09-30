@@ -6,14 +6,13 @@ import scrumLab from "../../assets/certs/scrumlab.png";
 import stanfordCodeinplace from "../../assets/certs/stanfordCodeinplace.png";
 import { Button } from "../buttons/Button";
 import { useInView } from "../../hooks/useInView";
+import { useLanguage } from "../../i18n/useLanguage";
 
 
 
 const certs = [
     {
         title: "GitHub Foundations",
-        description:
-            "Solid understanding of Git, GitHub workflows, branching strategies, and collaborative development best practices.",
         img: ghFoundations,
         issuedby: "GitHub",
         credetialid: "",
@@ -21,8 +20,6 @@ const certs = [
     },
     {
         title: "IBM PY0101EN: Python 101 for Data Science",
-        description:
-            "Foundational Python skills focused on data analysis, problem-solving, and working with structured datasets.",
         img: ibmDatascience,
         issuedby: "IBM",
         credetialid: "",
@@ -30,8 +27,6 @@ const certs = [
     },
     {
         title: "CS106A: Code in Place",
-        description:
-            "Stanford’s introductory programming course covering problem-solving, algorithms, and core programming principles.",
         img: stanfordCodeinplace,
         issuedby: "Stanford University - Code In Place",
         credetialid: "",
@@ -39,8 +34,6 @@ const certs = [
     },
     {
         title: "Registered Scrum Basics",
-        description:
-            "Fundamentals of Scrum framework, agile principles, team roles, and iterative product development.",
         img: scrumLab,
         issuedby: "Scrum Inc.",
         credetialid: "#RSB-2627533",
@@ -48,8 +41,6 @@ const certs = [
     },
     {
         title: "Project Management Fundamentals",
-        description:
-            "Core project management concepts including planning, risk management, stakeholder communication, and execution strategies.",
         img: ibmPm,
         issuedby: "IBM",
         credetialid: "",
@@ -60,6 +51,7 @@ const certs = [
 
 
 export const Certs = () => {
+    const { t } = useLanguage();
     const isMobile = window.innerWidth < 768;
 
     const [sectionRef, isVisible] = useInView({
@@ -85,17 +77,17 @@ export const Certs = () => {
 
                 >
                     <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">
-                        Certifications
+                        {t.certs.eyebrow}
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animation-fade-in animation-delay-100 text-secondary-foreground">
-                        Knowledge
+                        {t.certs.headingStart}
                         <span className="font-sans italic font-normal text-white">
                             {" "}
-                            that gives me the lead.
+                            {t.certs.headingEnd}
                         </span>
                     </h2>
                     <p className="text-muted-foreground animate-fade-in animation-delay-200">
-                        Continuous learning turned into action. These certifications validate my commitment to building better, faster, and smarter.
+                        {t.certs.intro}
                     </p>
                 </div>
                 <div className="">
@@ -111,10 +103,10 @@ flex flex-col transition-transform duration-300 ease-out hover:scale-105
                                 <div className="flex flex-col flex-1 mx-10 text-muted-foreground text-sm">
                                     <p className="text-center text-secondary-foreground text-base">{cert.title}</p>
                                     <div className="flex flex-col gap-2 mt-2 text-center">
-                                        <p>Issued by: {cert.issuedby}</p>
-                                        <p>{cert.description}</p>
+                                        <p>{t.certs.issuedBy} {cert.issuedby}</p>
+                                        <p>{t.certs.descriptions[id]}</p>
                                         {cert.credetialid != "" &&
-                                            <p className="text-secondary-foreground">Credential ID: {cert.credetialid}</p>}
+                                            <p className="text-secondary-foreground">{t.certs.credentialId} {cert.credetialid}</p>}
                                     </div>
                                     <div className="mt-auto flex justify-end mb-4">
                                         {cert.link != "" &&
@@ -123,7 +115,7 @@ flex flex-col transition-transform duration-300 ease-out hover:scale-105
                                                     href={cert.link}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    aria-label="Certification Link"
+                                                    aria-label={`${t.certs.linkLabel}: ${cert.title}`}
                                                 >
                                                     <ExternalLink className="text-primary mb-1"></ExternalLink>
                                                 </a>
@@ -142,7 +134,7 @@ flex flex-col transition-transform duration-300 ease-out hover:scale-105
             </div>
             <div className="flex flex-col items-center justify-center text-center mt-8">
                 <span className="text-secondary-foreground">
-                    Checkout my other certifications
+                    {t.certs.other}
                 </span>
                 <ArrowDown className="text-secondary-foreground animate-bounce mt-2" />
 

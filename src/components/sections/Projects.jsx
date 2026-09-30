@@ -5,8 +5,10 @@ import { ArrowDown, ExternalLink, Github } from "lucide-react"
 import { Button } from "../buttons/Button"
 import { useInView } from "../../hooks/useInView";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../../i18n/useLanguage";
 
 const ProjectVideo = ({ src }) => {
+    const { t } = useLanguage();
     const containerRef = useRef(null);
     const videoRef = useRef(null);
     const [isNear, setIsNear] = useState(false);
@@ -60,7 +62,7 @@ const ProjectVideo = ({ src }) => {
                 playsInline
                 onPlaying={() => setHasPlayed(true)}
                 controls={reducedMotion && manualPlay}
-                aria-label="Ubymed client app preview"
+                aria-label={t.projects.videoLabel}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <img
@@ -73,7 +75,7 @@ const ProjectVideo = ({ src }) => {
             />
             {reducedMotion && !manualPlay && (
                 <button type="button" onClick={() => setManualPlay(true)} className="absolute inset-0 z-20 flex items-center justify-center text-white font-medium bg-black/20">
-                    Play project video
+                    {t.projects.playVideo}
                 </button>
             )}
         </div>
@@ -82,18 +84,12 @@ const ProjectVideo = ({ src }) => {
 
 const projects = [
     {
-        title: "Ubymed — Client App",
-        description:
-            "Mobile healthcare application built for patients and users to request and manage medical services. I developed and refactored features for both Android and iOS using React Native and Django, improved app stability and performance, and implemented secure token management between frontend and backend. I also maintained backend services with Docker and Nginx and contributed to code quality by reviewing pull requests and improving team workflows.",
         media: { type: "video", src: Ubymed },
         tags: ["React Native", "Expo", "Django", "Python", "Docker", "Nginx", "AWS"],
         link: "#",
         github: "#"
     },
     {
-        title: "Ubymed Partners — Provider App",
-        description:
-            "Mobile platform built for healthcare providers (doctors and laboratories) to accept and manage service requests. I led feature development including maps with directions, autocomplete, and place search, optimized provider workflows, and improved system reliability. I also implemented secure token synchronization, maintained backend services with Docker and Nginx, and strengthened collaboration through pull request reviews and a branch management strategy that reduced conflicts and improved delivery speed.",
         media: { type: "image", src: UbymedPartners },
         tags: ["React Native", "Expo", "Django", "Python", "Docker", "Nginx", "AWS"],
         link: "#",
@@ -103,6 +99,7 @@ const projects = [
 
 
 export const Projects = () => {
+    const { t } = useLanguage();
     const [sectionRef, isVisible] = useInView({
         threshold: 0.2,
     });
@@ -117,20 +114,19 @@ export const Projects = () => {
                 <div className="text-center mx-auto max-w-3xl mb-16">
                     <span className={`text-secondary-foreground text-sm font-medium tracking-wider uppercase
     ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
-                        My Work
+                        {t.projects.eyebrow}
                     </span>
                     <h2 className={`text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground
     ${isVisible ? "animate-fade-in animation-delay-100" : "opacity-0"}`}>
-                        Real-World
+                        {t.projects.headingStart}
                         <span className="font-sans italic font-normal text-white">
                             {" "}
-                            Projects.
+                            {t.projects.headingEnd}
                         </span>
                     </h2>
                     <p className={`text-muted-foreground
     ${isVisible ? "animate-fade-in animation-delay-200" : "opacity-0"}`}>
-                        This is where you’ll find some of the projects I’ve built,
-                        from full-stack apps to backend systems. Each one reflects what I enjoy most: solving problems, learning new things, and turning ideas into working software.
+                        {t.projects.intro}
                     </p>
                 </div>
                 <div className="grid md:grid-cols-2 gap-8">
@@ -149,7 +145,7 @@ export const Projects = () => {
                                 ) : (
                                     <img
                                         src={item.media.src}
-                                        alt={item.title}
+                                        alt={t.projects.titles[id]}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                 )}
@@ -162,10 +158,10 @@ export const Projects = () => {
                             <div className="p-6 space-y-4">
                                 <div className="flex items-start justify-between">
                                     <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
-                                        {item.title}
+                                        {t.projects.titles[id]}
                                     </h3>
                                 </div>
-                                <p className="text-muted-foreground text-sm">{item.description}</p>
+                                <p className="text-muted-foreground text-sm">{t.projects.descriptions[id]}</p>
                                 <div className="flex flex-wrap gap-2">
                                     {item.tags.map((tag, index) => (
                                         <span key={index}
@@ -181,22 +177,21 @@ export const Projects = () => {
             <div className="flex flex-col items-center justify-center text-center mt-6">
                 {/* Enhanced Text: Connecting Certs to Projects */}
                 <h3 className="text-secondary-foreground font-medium mb-2">
-                    From Theory to Practice
+                    {t.projects.theory}
                 </h3>
                 <p className="text-muted-foreground max-w-md mb-4 text-sm">
-                    See how I apply these skills to build
-                    real-world solutions and scalable applications.
+                    {t.projects.application}
                 </p>
 
                 {/* The Animated Pointer */}
                 <span className="text-xs uppercase tracking-widest text-primary font-bold mb-2">
-                    Explore My Code
+                    {t.projects.explore}
                 </span>
                 <ArrowDown className="text-primary animate-bounce h-5 w-5" />
 
                 <div className="flex items-center justify-center gap-4 mt-1">
                         <Button href="https://github.com/jp1593" target="_blank" rel="noopener noreferrer" className="bg-surface hover:text-white flex gap-2 items-center">
-                            View GitHub Projects <Github size={18} />
+                            {t.projects.github} <Github size={18} />
                         </Button>
                 </div>
             </div>

@@ -3,6 +3,7 @@ import { AnimatedBorderButton } from "../buttons/AnimatedBorderButton"
 import { ChevronDown, Download, Github, Linkedin, X } from "lucide-react"
 import { useInView } from "../../hooks/useInView";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../../i18n/useLanguage";
 
 const useDecodedImage = () => {
     const ref = useRef(null);
@@ -38,24 +39,15 @@ const skills = [
 ];
 
 export const Hero = () => {
+    const { t } = useLanguage();
     const [sectionRef, isVisible] = useInView({
         threshold: 0.2,
     });
     const [backgroundRef, backgroundReady] = useDecodedImage();
     const [hawkRef, hawkReady] = useDecodedImage();
     const recipient = 'juanpablo08082002@hotmail.com'
-    const subject = '[Project/Role Inquiry] - Juan Pablo | [Your Company Name]';
-    const body = `Hello Juan Pablo,
-
-I am reaching out regarding: [Project Name / Job Title]
-
-Company/Organization: [Enter Name]
-Message: [Briefly describe why you are reaching out]
-
-You can best reach me at: [Phone/Email]
-
-Best regards,
-[Your Name]`;
+    const subject = t.email.subject;
+    const body = t.email.body;
     const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     const handleDownload = () => {
         const link = document.createElement('a');
@@ -101,39 +93,37 @@ Best regards,
                             <div className="">
                                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary animate-fade-in animation-delay-100">
                                     <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                                    Software Engineer
+                                    {t.hero.role}
                                 </span>
                             </div>
                             {/* Headline */}
                             <div className="space-y-4">
                                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in animation-delay-200">
-                                    Transforming <span className="text-primary glow-text italic">ideas</span>
+                                    {t.hero.headlineStart} <span className="text-primary glow-text italic">{t.hero.ideas}</span>
                                     <br />
-                                    into <span className="text-amber-200 italic">reality</span>
+                                    {t.hero.headlineMiddle} <span className="text-amber-200 italic">{t.hero.reality}</span>
                                 </h1>
                                 <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-300">
-                                    Welcome to the digital workspace of Juan Pablo Estrada Lucero
-                                    - A Software Engineer focused on Backend Engineering and Full-Stack Development. With a core proficiency in Python
-                                    (Django) and JavaScript (React), I build seamless, high-performance web and mobile applications.
+                                    {t.hero.intro}
                                 </p>
                             </div>
                             {/* Call to action - Buttons */}
                             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
                                     <Button href={mailtoUrl} size="lg">
-                                        Contact Me
+                                        {t.nav.contact}
                                     </Button>
                                 <AnimatedBorderButton onClick={handleDownload}>
                                     <Download className="w-5 h-5" />
-                                    Download CV
+                                    {t.hero.download}
                                 </AnimatedBorderButton>
                             </div>
                             {/* Social Links */}
                             <div className="flex items-center gap-4 animate-fade-in animation-delay-300">
-                                <span> Follow:</span>
+                                <span> {t.hero.follow}</span>
                                 {[
-                                    { icon: Github, href: "https://github.com/jp1593" },
-                                    { icon: Linkedin, href: "https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/" },
-                                    { icon: X, href: "https://x.com/SirAnonymusGt" }
+                                    { icon: Github, href: "https://github.com/jp1593", label: t.hero.github },
+                                    { icon: Linkedin, href: "https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/", label: t.hero.linkedin },
+                                    { icon: X, href: "https://x.com/SirAnonymusGt", label: t.hero.x }
 
                                 ].map((social, id) => {
                                     const Icon = social.icon;
@@ -141,6 +131,7 @@ Best regards,
                                         <a
                                             key={id}
                                             href={social.href}
+                                            aria-label={social.label}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-colors duration-300"
@@ -162,7 +153,7 @@ Best regards,
                             <div className="relative max-w-md mx-auto">
                                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/30 via-transparent to-primary/10 blur-2xl animate-pulse-glow" />
                                 <div className="relative glass rounded-3xl p-2 glow-border will-change-transform">
-                                    <img ref={hawkRef} src="/assets/hawk.webp" alt="Hawk Avatar"
+                                    <img ref={hawkRef} src="/assets/hawk.webp" alt={t.hero.avatar}
                                         className={`w-full aspect-4/5 object-cover rounded-2xl transition-opacity duration-700 ${hawkReady ? "opacity-100" : "opacity-0"}`}
                                         loading="eager"
                                         decoding="async" />
@@ -172,7 +163,7 @@ Best regards,
                     </div>
                     {/* Tech Stack */}
                     <div className="mt-20 animate-fade-in animation-delay-300">
-                        <p className="text-sm text-muted-foreground mb-6 text-center">Tech Stack:</p>
+                        <p className="text-sm text-muted-foreground mb-6 text-center">{t.hero.techStack}</p>
                         <div className="relative overflow-hidden">
                             <div className="flex animate-marquee w-max flex-nowrap">
                                 {[...skills, ...skills, ...skills].map((skill, index) => (
@@ -189,7 +180,7 @@ Best regards,
                 </div>
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in animation-delay-300">
                     <a href="#about" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary">
-                        <span className="text-xs uppercase tracking-wider">Scroll</span>
+                        <span className="text-xs uppercase tracking-wider">{t.hero.scroll}</span>
                         <ChevronDown className="w-6 h-6 animate-bounce" />
                     </a>
                 </div>
