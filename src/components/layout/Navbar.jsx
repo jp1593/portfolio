@@ -38,6 +38,8 @@ export const NavBar = () => {
                         <img
                             src={jpLogo}
                             alt={t.nav.logo}
+                            fetchPriority="high"
+                            loading="eager"
                             className="h-28 w-auto absolute top-1/2 -translate-y-1/2 -left-6 md:left-0 cursor-pointer"
                         />
                     </a>
@@ -62,9 +64,9 @@ export const NavBar = () => {
 
                 <div className="hidden md:flex justify-end items-center gap-4">
                     <LanguageSelector language={language} setLanguage={setLanguage} t={t} />
-                        <Button href={mailtoUrl} size="sm">
-                            {t.nav.contact}
-                        </Button>
+                    <Button href={mailtoUrl} size="sm">
+                        {t.nav.contact}
+                    </Button>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -90,10 +92,10 @@ export const NavBar = () => {
                                 {link.label}
                             </a>
                         ))}
-                            <LanguageSelector language={language} setLanguage={setLanguage} t={t} />
-                            <Button href={mailtoUrl} size="sm" className="mt-2">
-                                {t.nav.contact}
-                            </Button>
+                        <LanguageSelector language={language} setLanguage={setLanguage} t={t} />
+                        <Button href={mailtoUrl} size="sm" className="mt-2">
+                            {t.nav.contact}
+                        </Button>
                     </div>
                 </div>
             )}
