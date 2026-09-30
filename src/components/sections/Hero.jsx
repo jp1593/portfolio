@@ -1,8 +1,35 @@
 import { Button } from "../buttons/Button"
 import { AnimatedBorderButton } from "../buttons/AnimatedBorderButton"
 import { ChevronDown, Download, Github, Linkedin, X } from "lucide-react"
-import { useEffect, useState } from "react"
 import { useInView } from "../../hooks/useInView";
+import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../../i18n/useLanguage";
+
+const useDecodedImage = () => {
+    const ref = useRef(null);
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        const image = ref.current;
+        if (!image) return;
+        let active = true;
+        const reveal = () => {
+            Promise.resolve(image.decode?.()).catch(() => {}).then(() => {
+                if (active) setIsReady(true);
+            });
+        };
+
+        if (image.complete && image.naturalWidth > 0) reveal();
+        else image.addEventListener("load", reveal);
+
+        return () => {
+            active = false;
+            image.removeEventListener("load", reveal);
+        };
+    }, []);
+
+    return [ref, isReady];
+};
 
 
 const skills = [
@@ -12,51 +39,16 @@ const skills = [
 ];
 
 export const Hero = () => {
+    const { t } = useLanguage();
     const [sectionRef, isVisible] = useInView({
         threshold: 0.2,
     });
-    const [isReady, setIsReady] = useState(false);
-
-    useEffect(() => {
-        const bg = new Image();
-        const hawk = new Image();
-
-        let loaded = 0;
-
-        const check = () => {
-            loaded++;
-            if (loaded === 2) setIsReady(true);
-        };
-
-        bg.src = "/assets/liquid-purple.webp";
-        hawk.src = "/assets/hawk.webp";
-
-        bg.onload = check;
-        hawk.onload = check;
-    }, []);
+    const [backgroundRef, backgroundReady] = useDecodedImage();
+    const [hawkRef, hawkReady] = useDecodedImage();
     const recipient = 'juanpablo08082002@hotmail.com'
-    const subject = '[Project/Role Inquiry] - Juan Pablo | [Your Company Name]';
-    const body = `Hello Juan Pablo,
-
-I am reaching out regarding: [Project Name / Job Title]
-
-Company/Organization: [Enter Name]
-Message: [Briefly describe why you are reaching out]
-
-You can best reach me at: [Phone/Email]
-
-Best regards,
-[Your Name]`;
+    const subject = t.email.subject;
+    const body = t.email.body;
     const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50)
-        }
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
-
-
     const handleDownload = () => {
         const link = document.createElement('a');
         link.href = '/my-cv.pdf';
@@ -66,37 +58,29 @@ Best regards,
         document.body.removeChild(link);
     };
 
-    if (!isReady) {
-        return (
-            <div className="h-screen w-full bg-background flex items-center justify-center">
-                {/* opcional: loader */}
-            </div>
-        );
-    }
-
     return (
             <section className="relative min-h-screen flex items-center overflow-hidden"
                 ref={sectionRef}>
                 {/* BG */}
-                <div className="absolute inset-0">
-                    <img src="/assets/liquid-purple.webp" alt="Background Image"
-                        className="w-full h-full object-cover opacity-40"
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_40%_15%,#36164f_0%,#191329_45%,#0f1418_100%)]">
+                    <img ref={backgroundRef} src="/assets/liquid-purple-4320.webp" alt="" aria-hidden="true"
+                        className={`w-full h-full object-cover transition-opacity duration-1000 ease-out ${backgroundReady ? "opacity-40" : "opacity-0"}`}
                         loading="eager"
                         fetchpriority="high"
-                        decoding="sync"
+                        decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" />
                 </div>
                 {/* Floating Dots */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {[...Array(30)].map((_, i) => (
-                        <div className="absolute w-1.5 h-1.5 rounded-full opacity-60"
+                <div className={`absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-1000 ${backgroundReady ? "opacity-100" : "opacity-0"}`}>
+                    {[...Array(30).keys()].map((i) => (
+                        <div key={i} className="absolute w-1.5 h-1.5 rounded-full opacity-60"
                             style={{
                                 backgroundColor: "#8a00c4",
-                                left: `${Math.random() * 100}%`,
-                                top: `${Math.random() * 100}%`,
-                                animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
-                                animationDelay: `${Math.random() * 5}s`
+                                left: `${(i * 37) % 100}%`,
+                                top: `${(i * 53) % 100}%`,
+                                animation: `slow-drift ${15 + (i * 7) % 20}s ease-in-out infinite`,
+                                animationDelay: `${(i * 3) % 5}s`
                             }} />
                     ))}
                 </div>
@@ -109,41 +93,37 @@ Best regards,
                             <div className="">
                                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary animate-fade-in animation-delay-100">
                                     <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                                    Software Engineer
+                                    {t.hero.role}
                                 </span>
                             </div>
                             {/* Headline */}
                             <div className="space-y-4">
                                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in animation-delay-200">
-                                    Transforming <span className="text-primary glow-text italic">ideas</span>
+                                    {t.hero.headlineStart} <span className="text-primary glow-text italic">{t.hero.ideas}</span>
                                     <br />
-                                    into <span className="text-amber-200 italic">reality</span>
+                                    {t.hero.headlineMiddle} <span className="text-amber-200 italic">{t.hero.reality}</span>
                                 </h1>
                                 <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-300">
-                                    Welcome to the digital workspace of Juan Pablo Estrada Lucero
-                                    - A Software Engineer focused on Backend Engineering and Full-Stack Development. With a core proficiency in Python
-                                    (Django) and JavaScript (React), I build seamless, high-performance web and mobile applications.
+                                    {t.hero.intro}
                                 </p>
                             </div>
                             {/* Call to action - Buttons */}
                             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-                                <a href={mailtoUrl}>
-                                    <Button size="lg">
-                                        Contact Me
+                                    <Button href={mailtoUrl} size="lg">
+                                        {t.nav.contact}
                                     </Button>
-                                </a>
                                 <AnimatedBorderButton onClick={handleDownload}>
                                     <Download className="w-5 h-5" />
-                                    Download CV
+                                    {t.hero.download}
                                 </AnimatedBorderButton>
                             </div>
                             {/* Social Links */}
                             <div className="flex items-center gap-4 animate-fade-in animation-delay-300">
-                                <span> Follow:</span>
+                                <span> {t.hero.follow}</span>
                                 {[
-                                    { icon: Github, href: "https://github.com/jp1593" },
-                                    { icon: Linkedin, href: "https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/" },
-                                    { icon: X, href: "https://x.com/SirAnonymusGt" }
+                                    { icon: Github, href: "https://github.com/jp1593", label: t.hero.github },
+                                    { icon: Linkedin, href: "https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/", label: t.hero.linkedin },
+                                    { icon: X, href: "https://x.com/SirAnonymusGt", label: t.hero.x }
 
                                 ].map((social, id) => {
                                     const Icon = social.icon;
@@ -151,6 +131,7 @@ Best regards,
                                         <a
                                             key={id}
                                             href={social.href}
+                                            aria-label={social.label}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-colors duration-300"
@@ -172,19 +153,17 @@ Best regards,
                             <div className="relative max-w-md mx-auto">
                                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/30 via-transparent to-primary/10 blur-2xl animate-pulse-glow" />
                                 <div className="relative glass rounded-3xl p-2 glow-border will-change-transform">
-                                    <img src="/assets/hawk.webp" alt="Hawk Avatar"
-                                        className="w-full aspect-4/5 object-cover rounded-2xl"
-                                        onLoad={(e) => e.currentTarget.classList.remove("opacity-0")}
+                                    <img ref={hawkRef} src="/assets/hawk.webp" alt={t.hero.avatar}
+                                        className={`w-full aspect-4/5 object-cover rounded-2xl transition-opacity duration-700 ${hawkReady ? "opacity-100" : "opacity-0"}`}
                                         loading="eager"
-                                        fetchpriority="high"
-                                        decoding="sync" />
+                                        decoding="async" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     {/* Tech Stack */}
-                    <div className="mt-20 animate-fade-in  animation-delay-300">
-                        <p className="text-sm text-muted-foreground mb-6 text-center">Tech Stack:</p>
+                    <div className="mt-20 animate-fade-in animation-delay-300">
+                        <p className="text-sm text-muted-foreground mb-6 text-center">{t.hero.techStack}</p>
                         <div className="relative overflow-hidden">
                             <div className="flex animate-marquee w-max flex-nowrap">
                                 {[...skills, ...skills, ...skills].map((skill, index) => (
@@ -201,7 +180,7 @@ Best regards,
                 </div>
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in animation-delay-300">
                     <a href="#about" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary">
-                        <span className="text-xs uppercase tracking-wider">Scroll</span>
+                        <span className="text-xs uppercase tracking-wider">{t.hero.scroll}</span>
                         <ChevronDown className="w-6 h-6 animate-bounce" />
                     </a>
                 </div>
