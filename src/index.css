@@ -29,6 +29,13 @@
     scroll-padding-top: 5.5rem;
   }
 
+  #about,
+  #certifications,
+  #projects,
+  #experience {
+    scroll-margin-top: 1rem;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);

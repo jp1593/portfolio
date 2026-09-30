@@ -105,11 +105,11 @@ export const Projects = () => {
     });
 
     return (
-        <section id="projects" className="py-24 relative overflow-hidden" ref={sectionRef}>
+        <section className="py-24 relative overflow-hidden" ref={sectionRef}>
             {/* Background */}
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/70 rounded-full blur-3xl" />
             <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/85 rounded-full blur-3xl" />
-            <div className="container mx-auto px-6 reltive z-10">
+            <div id="projects" className="container mx-auto px-6 reltive z-10">
                 {/* Section Header */}
                 <div className="text-center mx-auto max-w-3xl mb-16">
                     <span className={`text-secondary-foreground text-sm font-medium tracking-wider uppercase

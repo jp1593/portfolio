@@ -61,12 +61,12 @@ export const Certs = () => {
 
     return (
 
-        <section id="certifications"
+        <section
             className="py-31 relative overflow-hidden" ref={sectionRef}>
 
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/70 rounded-full blur-3xl" />
             <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/85 rounded-full blur-3xl" />
-            <div className="container mx-auto px-6 reltive z-10">
+            <div id="certifications" className="container mx-auto px-6 reltive z-10">
                 <div
                     className={`
     text-center mx-auto max-w-3xl mb-16
