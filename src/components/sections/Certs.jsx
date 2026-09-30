@@ -79,7 +79,7 @@ export const Certs = () => {
                     className={`
     text-center mx-auto max-w-3xl mb-16
     transform transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
-        ${isVisible ? "animate-fade-in opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+        ${isVisible ? "animate-fade-in opacity-100 translate-y-0" : "opacity-100 translate-y-0 md:opacity-0 md:translate-y-10"}
 
   `}
 
@@ -103,7 +103,7 @@ export const Certs = () => {
                         {certs.map((cert, id) => (
                             <div className={`max-w-82 w-full rounded-3xl border border-primary glass glow-border 
 flex flex-col transition-transform duration-300 ease-out hover:scale-105
-    ${isVisible ? "animate-fade-in opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+    ${isVisible ? "animate-fade-in opacity-100 translate-y-0" : "opacity-100 translate-y-0 md:opacity-0 md:translate-y-10"}
 `} style={{ animationDelay: `${(id + 1) * 200}ms` }}>
                                 <div className="flex w-full justify-center mt-4 mb-4" >
                                     <img className="max-w-48" src={cert.img} />
@@ -147,24 +147,12 @@ flex flex-col transition-transform duration-300 ease-out hover:scale-105
                 <ArrowDown className="text-secondary-foreground animate-bounce mt-2" />
 
                 <div className="flex items-center justify-center gap-2 text-muted-foreground">
-                    <a
-                        href="https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/?originalSubdomain=gt"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <Button className="bg-surface hover:text-white">
+                        <Button href="https://www.linkedin.com/in/juan-pablo-estrada-lucero-18936b247/?originalSubdomain=gt" target="_blank" rel="noopener noreferrer" className="bg-surface hover:text-white">
                             Linkedin <ExternalLink />
                         </Button>
-                    </a>
-                    <a
-                        href="https://www.credly.com/users/juan-pablo-estrada-lucero"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <Button className="bg-surface hover:text-white">
+                        <Button href="https://www.credly.com/users/juan-pablo-estrada-lucero" target="_blank" rel="noopener noreferrer" className="bg-surface hover:text-white">
                             Credly <ExternalLink />
                         </Button>
-                    </a>
                 </div>
             </div>
         </section>

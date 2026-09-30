@@ -1,5 +1,5 @@
-export const Button = ({ className = "", size = "default", children }) => {
-    const baseClasses = "relative overflow-hidden rounded-full font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary text-p[rimary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25";
+export const Button = ({ className = "", size = "default", children, href, ...props }) => {
+    const baseClasses = "relative inline-flex items-center justify-center overflow-hidden rounded-full font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25";
 
     const sizeClasses = {
         sm: "px-4 py-2 text-sm", 
@@ -9,12 +9,11 @@ export const Button = ({ className = "", size = "default", children }) => {
 
     const classes = `${baseClasses} ${sizeClasses[size]} ${className}`;
 
-    return (
-        <button className={classes}>
-            <span className="relative flex items-center justify-center gap-2">
-                {children}
-            </span>
-        </button>
-    )
-}
+    const content = <span className="relative flex items-center justify-center gap-2">{children}</span>;
 
+    return href ? (
+        <a href={href} className={classes} {...props}>{content}</a>
+    ) : (
+        <button type="button" className={classes} {...props}>{content}</button>
+    );
+}

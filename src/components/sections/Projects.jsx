@@ -1,8 +1,84 @@
 import Ubymed from "../../assets/projects/Ubymed.mp4"
+import UbymedPoster from "../../assets/projects/Ubymed-poster.webp"
 import UbymedPartners from "../../assets/projects/UbymedPartners.png"
 import { ArrowDown, ExternalLink, Github } from "lucide-react"
 import { Button } from "../buttons/Button"
 import { useInView } from "../../hooks/useInView";
+import { useEffect, useRef, useState } from "react";
+
+const ProjectVideo = ({ src }) => {
+    const containerRef = useRef(null);
+    const videoRef = useRef(null);
+    const [isNear, setIsNear] = useState(false);
+    const [isInView, setIsInView] = useState(false);
+    const [hasPlayed, setHasPlayed] = useState(false);
+    const [manualPlay, setManualPlay] = useState(false);
+    const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const updateMotion = () => setReducedMotion(mediaQuery.matches);
+        mediaQuery.addEventListener("change", updateMotion);
+        return () => mediaQuery.removeEventListener("change", updateMotion);
+    }, []);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) setIsNear(true);
+            setIsInView(entry.isIntersecting);
+        }, { rootMargin: "800px 0px" });
+        const node = containerRef.current;
+        if (node) observer.observe(node);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+        if (isInView && !reducedMotion && isNear) {
+            video.play().catch(() => {});
+        } else if (!isInView || reducedMotion) {
+            video.pause();
+        }
+    }, [isInView, isNear, reducedMotion]);
+
+    useEffect(() => {
+        if (manualPlay && reducedMotion && isInView) {
+            videoRef.current?.play().catch(() => {});
+        }
+    }, [manualPlay, reducedMotion, isInView]);
+
+    return (
+        <div ref={containerRef} className="relative w-full h-full">
+            <video
+                ref={videoRef}
+                src={isNear && (!reducedMotion || manualPlay) ? src : undefined}
+                preload="none"
+                autoPlay={isInView && !reducedMotion}
+                muted
+                loop
+                playsInline
+                onPlaying={() => setHasPlayed(true)}
+                controls={reducedMotion && manualPlay}
+                aria-label="Ubymed client app preview"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <img
+                src={UbymedPoster}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+                className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-500 ${hasPlayed ? "opacity-0" : "opacity-100"}`}
+            />
+            {reducedMotion && !manualPlay && (
+                <button type="button" onClick={() => setManualPlay(true)} className="absolute inset-0 z-20 flex items-center justify-center text-white font-medium bg-black/20">
+                    Play project video
+                </button>
+            )}
+        </div>
+    );
+};
 
 const projects = [
     {
@@ -68,16 +144,8 @@ export const Projects = () => {
                             style={{ animationDelay: `${(id + 1) * 150}ms` }}
                         >
                             <div className="relative overflow-hidden aspect-video">
-                                {/* <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" /> */}
                                 {item.media.type === "video" ? (
-                                    <video
-                                        src={item.media.src}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                    />
+                                    <ProjectVideo src={item.media.src} />
                                 ) : (
                                     <img
                                         src={item.media.src}
@@ -127,11 +195,9 @@ export const Projects = () => {
                 <ArrowDown className="text-primary animate-bounce h-5 w-5" />
 
                 <div className="flex items-center justify-center gap-4 mt-1">
-                    <a href="https://github.com/jp1593" target="_blank" rel="noopener noreferrer">
-                        <Button className="bg-surface hover:text-white flex gap-2 items-center">
+                        <Button href="https://github.com/jp1593" target="_blank" rel="noopener noreferrer" className="bg-surface hover:text-white flex gap-2 items-center">
                             View GitHub Projects <Github size={18} />
                         </Button>
-                    </a>
                 </div>
             </div>
         </section >

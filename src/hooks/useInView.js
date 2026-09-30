@@ -9,10 +9,11 @@ export const useInView = (options = {}) => {
       setIsVisible(entry.isIntersecting);
     }, options);
 
-    if (ref.current) observer.observe(ref.current);
+    const node = ref.current;
+    if (node) observer.observe(node);
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (node) observer.unobserve(node);
     };
   }, [options]);
 

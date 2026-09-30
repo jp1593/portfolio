@@ -37,7 +37,7 @@ Best regards,
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter] duration-300 u${isScrolled ? "glass-strong" : "bg-transparent"} z-50`}
+            className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300 ${isScrolled ? "glass-strong" : "bg-transparent shadow-none"}`}
         >
             <nav className="max-w-7xl mx-auto px-6 grid grid-cols-[1fr_auto_1fr] items-center h-18">
 
@@ -70,16 +70,14 @@ Best regards,
                 {/* Desktop Button */}
 
                 <div className="hidden md:flex justify-end">
-                    <a href={mailtoUrl}>
-                        <Button size="sm">
+                        <Button href={mailtoUrl} size="sm">
                             Contact Me
                         </Button>
-                    </a>
                 </div>
 
                 {/* Mobile Menu Button */}
                 <div className="flex md:hidden justify-end col-span-2">
-                    <button onClick={() => setIsOpen(!isOpen)}>
+                    <button type="button" aria-label={isOpen ? "Close menu" : "Open menu"} aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen(!isOpen)}>
                         {isOpen ? <X size={28} /> : <Menu size={28} />}
                     </button>
                 </div>
@@ -88,7 +86,7 @@ Best regards,
 
             {/* Mobile Dropdown */}
             {isOpen && (
-                <div className="md:hidden px-6 pb-6">
+                <div id="mobile-navigation" className="md:hidden px-6 pb-6">
                     <div className="glass rounded-2xl p-4 flex flex-col gap-3 mt-4">
                         {navLinks.map((link, index) => (
                             <a
@@ -100,11 +98,9 @@ Best regards,
                                 {link.label}
                             </a>
                         ))}
-                        <a href={mailtoUrl}>
-                            <Button size="sm" className="mt-2">
+                            <Button href={mailtoUrl} size="sm" className="mt-2">
                                 Contact Me
                             </Button>
-                        </a>
                     </div>
                 </div>
             )}
