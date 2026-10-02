@@ -47,6 +47,15 @@ To run this portfolio locally, follow these steps:
 
 ## 📬 Contact & Connect
 
+The Contact Me buttons open a form that sends through a Vercel Function and Resend.
+
+1. Create a Resend account and an API key. Add and verify a sending domain in Resend (including its requested DNS records). The sender address must use that verified domain.
+2. Set `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, and `CONTACT_TO_EMAIL` in the Vercel project's Development, Preview, and Production environments as needed. Copy `.env.example` to an ignored `.env.local` for local values. Keep the API key server-side; do not give it a `VITE_` prefix.
+3. Run `vercel dev` from the project root to test both the site and `/api/contact` locally. Plain `npm run dev` serves the Vite frontend but not the Vercel Function.
+4. Deploy to Vercel after configuring the environment variables and verified sender. Changes to Vercel environment variables require a new deployment.
+
+The visitor's email is set as Reply-To; the From and destination addresses come only from server environment variables.
+
 * **LinkedIn:** [linkedin.com/in/jp1593](https://www.linkedin.com/in/jp1593)
 * **X (Twitter):** [@SirAnonymusGt](https://x.com/SirAnonymusGt)
 * **YouTube:** [SirAnonymusGt](https://youtube.com/@SirAnonymusGt)

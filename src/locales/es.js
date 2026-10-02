@@ -8,9 +8,14 @@ const es = {
     contact: "Contáctame", openMenu: "Abrir menú", closeMenu: "Cerrar menú", logo: "Logotipo de JP",
     language: "Idioma", english: "Inglés", spanish: "Español",
   },
-  email: {
-    subject: "[Consulta sobre proyecto/puesto] - Juan Pablo | [Nombre de su empresa]",
-    body: "Hola Juan Pablo:\n\nTe escribo en relación con: [Nombre del proyecto / Puesto]\n\nEmpresa/organización: [Nombre]\nMensaje: [Describe brevemente el motivo de tu consulta]\n\nPuedes contactarme en: [Teléfono/correo electrónico]\n\nSaludos cordiales,\n[Tu nombre]",
+  contact: {
+    title: "Contactar a Juan Pablo", name: "Nombre", email: "Correo electrónico", company: "Empresa / Organización",
+    project: "Proyecto / Puesto", message: "Mensaje", namePlaceholder: "Tu nombre",
+    emailPlaceholder: "tu@ejemplo.com", companyPlaceholder: "Tu organización (opcional)",
+    projectPlaceholder: "Nombre del proyecto o puesto", messagePlaceholder: "Cuéntame por qué me escribes",
+    send: "Enviar mensaje", sending: "Enviando…", close: "Cerrar", cancel: "Cancelar",
+    success: "Mensaje enviado. ¡Gracias por contactarme!", error: "No se pudo enviar el mensaje. Inténtalo de nuevo.",
+    required: "Este campo es obligatorio.", invalidEmail: "Ingresa un correo electrónico válido.", tooLong: "Este campo es demasiado largo.",
   },
   hero: {
     role: "Ingeniero de Software", headlineStart: "Transformando", ideas: "ideas", headlineMiddle: "en", reality: "realidad",

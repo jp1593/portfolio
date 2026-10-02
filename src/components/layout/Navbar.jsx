@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 import { useLanguage } from "../../i18n/useLanguage"
 
-export const NavBar = () => {
+export const NavBar = ({ onContactClick }) => {
     const { language, setLanguage, t } = useLanguage()
     const navLinks = [
         { href: "#about", label: t.nav.about },
@@ -14,10 +14,6 @@ export const NavBar = () => {
     ]
     const [isScrolled, setIsScrolled] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-    const recipient = 'juanpablo08082002@hotmail.com'
-    const subject = t.email.subject;
-    const body = t.email.body;
-    const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50)
@@ -64,7 +60,7 @@ export const NavBar = () => {
 
                 <div className="hidden md:flex justify-end items-center gap-4">
                     <LanguageSelector language={language} setLanguage={setLanguage} t={t} />
-                    <Button href={mailtoUrl} size="sm">
+                    <Button onClick={onContactClick} size="sm">
                         {t.nav.contact}
                     </Button>
                 </div>
@@ -93,7 +89,7 @@ export const NavBar = () => {
                             </a>
                         ))}
                         <LanguageSelector language={language} setLanguage={setLanguage} t={t} />
-                        <Button href={mailtoUrl} size="sm" className="mt-2">
+                        <Button onClick={onContactClick} size="sm" className="mt-2">
                             {t.nav.contact}
                         </Button>
                     </div>
