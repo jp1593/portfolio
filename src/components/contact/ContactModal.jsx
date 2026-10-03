@@ -108,15 +108,15 @@ export const ContactModal = ({ open, onClose, triggerRef }) => {
 
   return createPortal(
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-3 sm:p-6" onMouseDown={(event) => { if (event.target === event.currentTarget) handleClose(); }}>
-      <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby={titleId} className="glass w-full max-w-2xl max-h-[calc(100dvh-1.5rem)] overflow-y-auto rounded-2xl bg-background/95 p-5 shadow-2xl shadow-primary/20 sm:p-8">
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby={titleId} className="glass w-full max-w-2xl max-h-[calc(100dvh-1.5rem)] overflow-y-auto rounded-2xl bg-transparent bg-gradient-to-b from-[#191329]/95 via-[#36164f]/60 to-[#36164f]/18 p-5 text-highlight shadow-2xl shadow-primary/20 sm:p-8">
         <div className="flex items-start justify-between gap-4">
-          <h2 id={titleId} className="text-2xl font-bold text-foreground">{c.title}</h2>
-          <button type="button" aria-label={c.close} onClick={handleClose} className="rounded-full p-2 text-foreground hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-primary"><X size={22} /></button>
+          <h2 id={titleId} className="text-2xl font-bold text-highlight">{c.title}</h2>
+          <button type="button" aria-label={c.close} onClick={handleClose} className="rounded-full p-2 text-highlight hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-highlight"><X size={22} /></button>
         </div>
         {status === "success" ? (
           <div className="mt-6 space-y-6" role="status">
-            <p className="text-foreground">{c.success}</p>
-            <button type="button" onClick={handleClose} className="rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">{c.close}</button>
+            <p className="text-highlight">{c.success}</p>
+            <button type="button" onClick={handleClose} className="rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-highlight">{c.close}</button>
           </div>
         ) : (
           <form onSubmit={submit} noValidate className="mt-6 space-y-4">
@@ -126,21 +126,21 @@ export const ContactModal = ({ open, onClose, triggerRef }) => {
             <div className="grid gap-4 sm:grid-cols-2">
               {fields.filter((field) => field !== "message").map((field) => (
                 <div key={field}>
-                  <label htmlFor={`${titleId}-${field}`} className="mb-1 block text-sm font-medium">{c[field]}{field !== "company" && " *"}</label>
-                  <input ref={field === "name" ? firstFieldRef : undefined} id={`${titleId}-${field}`} name={field} type={field === "email" ? "email" : "text"} autoComplete={field === "name" ? "name" : field === "email" ? "email" : field === "company" ? "organization" : "off"} required={field !== "company"} maxLength={limits[field]} value={form[field]} placeholder={c[`${field}Placeholder`]} aria-invalid={Boolean(errors[field])} aria-describedby={errors[field] ? `${titleId}-${field}-error` : undefined} onChange={(event) => setForm({ ...form, [field]: event.target.value })} className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-primary" />
+                  <label htmlFor={`${titleId}-${field}`} className="mb-1 block text-sm font-medium text-highlight/90">{c[field]}{field !== "company" && " *"}</label>
+                  <input ref={field === "name" ? firstFieldRef : undefined} id={`${titleId}-${field}`} name={field} type={field === "email" ? "email" : "text"} autoComplete={field === "name" ? "name" : field === "email" ? "email" : field === "company" ? "organization" : "off"} required={field !== "company"} maxLength={limits[field]} value={form[field]} placeholder={c[`${field}Placeholder`]} aria-invalid={Boolean(errors[field])} aria-describedby={errors[field] ? `${titleId}-${field}-error` : undefined} onChange={(event) => setForm({ ...form, [field]: event.target.value })} className="w-full rounded-lg border border-highlight/25 bg-background/60 px-3 py-2 text-foreground placeholder:text-foreground/60 focus-visible:outline-2 focus-visible:outline-highlight" />
                   {errors[field] && <p id={`${titleId}-${field}-error`} className="mt-1 text-sm text-red-300">{errors[field]}</p>}
                 </div>
               ))}
             </div>
             <div>
-              <label htmlFor={`${titleId}-message`} className="mb-1 block text-sm font-medium">{c.message} *</label>
-              <textarea id={`${titleId}-message`} name="message" required rows={5} maxLength={limits.message} value={form.message} placeholder={c.messagePlaceholder} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? `${titleId}-message-error` : undefined} onChange={(event) => setForm({ ...form, message: event.target.value })} className="w-full resize-y rounded-lg border border-border bg-surface px-3 py-2 text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-primary" />
+              <label htmlFor={`${titleId}-message`} className="mb-1 block text-sm font-medium text-highlight/90">{c.message} *</label>
+              <textarea id={`${titleId}-message`} name="message" required rows={5} maxLength={limits.message} value={form.message} placeholder={c.messagePlaceholder} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? `${titleId}-message-error` : undefined} onChange={(event) => setForm({ ...form, message: event.target.value })} className="w-full resize-y rounded-lg border border-highlight/25 bg-background/60 px-3 py-2 text-foreground placeholder:text-foreground/60 focus-visible:outline-2 focus-visible:outline-highlight" />
               {errors.message && <p id={`${titleId}-message-error`} className="mt-1 text-sm text-red-300">{errors.message}</p>}
             </div>
             <div role="status" aria-live="polite">{status === "error" && <p className="text-sm text-red-300">{c.error}</p>}{status === "sending" && <p className="sr-only">{c.sending}</p>}</div>
             <div className="flex flex-wrap justify-end gap-3">
-              <button type="button" onClick={handleClose} className="rounded-full border border-border px-5 py-2 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-primary">{c.cancel}</button>
-              <button type="submit" disabled={status === "sending"} className="rounded-full bg-primary px-6 py-2 font-medium text-primary-foreground shadow-lg shadow-primary/25 hover:bg-primary/90 disabled:cursor-wait disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">{status === "sending" ? c.sending : c.send}</button>
+              <button type="button" onClick={handleClose} className="rounded-full border border-highlight/40 px-5 py-2 text-highlight hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-highlight">{c.cancel}</button>
+              <button type="submit" disabled={status === "sending"} className="rounded-full bg-primary px-6 py-2 font-medium text-primary-foreground shadow-lg shadow-primary/25 hover:bg-primary/90 disabled:cursor-wait disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-highlight">{status === "sending" ? c.sending : c.send}</button>
             </div>
           </form>
         )}
