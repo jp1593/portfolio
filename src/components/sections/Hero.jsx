@@ -38,17 +38,13 @@ const skills = [
     "Nginx", "Docker", "Postgres"
 ];
 
-export const Hero = () => {
+export const Hero = ({ onContactClick }) => {
     const { t } = useLanguage();
     const [sectionRef, isVisible] = useInView({
         threshold: 0.2,
     });
     const [backgroundRef, backgroundReady] = useDecodedImage();
     const [hawkRef, hawkReady] = useDecodedImage();
-    const recipient = 'juanpablo08082002@hotmail.com'
-    const subject = t.email.subject;
-    const body = t.email.body;
-    const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     const handleDownload = () => {
         const link = document.createElement('a');
         link.href = '/my-cv.pdf';
@@ -109,7 +105,7 @@ export const Hero = () => {
                             </div>
                             {/* Call to action - Buttons */}
                             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-                                    <Button href={mailtoUrl} size="lg">
+                                    <Button onClick={onContactClick} size="lg">
                                         {t.nav.contact}
                                     </Button>
                                 <AnimatedBorderButton onClick={handleDownload}>

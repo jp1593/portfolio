@@ -8,9 +8,14 @@ const en = {
     contact: "Contact Me", openMenu: "Open menu", closeMenu: "Close menu", logo: "JP Logo",
     language: "Language", english: "English", spanish: "Spanish",
   },
-  email: {
-    subject: "[Project/Role Inquiry] - Juan Pablo | [Your Company Name]",
-    body: "Hello Juan Pablo,\n\nI am reaching out regarding: [Project Name / Job Title]\n\nCompany/Organization: [Enter Name]\nMessage: [Briefly describe why you are reaching out]\n\nYou can best reach me at: [Phone/Email]\n\nBest regards,\n[Your Name]",
+  contact: {
+    title: "Contact Juan Pablo", name: "Name", email: "Email", company: "Company / Organization",
+    project: "Project / Role", message: "Message", namePlaceholder: "Your name",
+    emailPlaceholder: "you@example.com", companyPlaceholder: "Your organization (optional)",
+    projectPlaceholder: "Project name or job title", messagePlaceholder: "Tell me why you're reaching out",
+    send: "Send message", sending: "Sending…", close: "Close", cancel: "Cancel",
+    success: "Message sent. Thank you for reaching out!", error: "The message could not be sent. Please try again.",
+    required: "This field is required.", invalidEmail: "Enter a valid email address.", tooLong: "This field is too long.",
   },
   hero: {
     role: "Software Engineer", headlineStart: "Transforming", ideas: "ideas", headlineMiddle: "into", reality: "reality",
