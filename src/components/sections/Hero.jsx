@@ -47,8 +47,8 @@ export const Hero = ({ onContactClick }) => {
     const [hawkRef, hawkReady] = useDecodedImage();
     const handleDownload = () => {
         const link = document.createElement('a');
-        link.href = '/my-cv.pdf';
-        link.download = 'Juan_Pablo_Estrada_CV.pdf';
+        link.href = '/CV-Juan-Pablo-Estrada-2026.pdf';
+        link.download = 'CV-Juan-Pablo-Estrada-2026.pdf';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
